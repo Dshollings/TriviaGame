@@ -27,9 +27,9 @@ var qa = [
 		{
 			question: "How many times was Rome sacked in antiquity?",
 			correct: "Three or Four",
-			inco: ["One", "Two", "Six"]
+			inco: ["One", "Two", "Six"],
 			pic: "#",
-		},
+		}
 
 ]
 	// qa[] = question: ?
@@ -45,7 +45,7 @@ $("#start").on("click", function(){
 	$("#start").css("display", "none");
 	// timer
 	var time = 5;
-	
+	var rounds = 0;
 	var intervalId;
 
 	var hit = 0;
@@ -101,20 +101,19 @@ $("#start").on("click", function(){
     	//switch to question state
     	wt = 1
     	// make qa[0] qa[counter]
-    	$("#question").html(qa[0].question)
+    	$("#question").html(qa[rounds].question)
     	
 		$("#answers").empty();
 		$("#answers").css("visibility", "visible")
-    	var rando = Math.floor(Math.random()*4);
-        
+    	var rando = Math.floor((Math.random()*3)+1);
+        console.log(rando);
       	for (var i = 0; i < 3; i++){
-      	      	// make qa[0] qa[counter]
-      	      	$("#answers").append("<li class='answer'>" + qa[0].inco[i] + "</li>");
+      	      	$("#answers").append("<li class='answer'>" + qa[rounds].inco[i] + "</li>");
       	}
 
       	// is there a better way to randomly insert a list item
-      	// make qa[0] qa[counter]
-      	$("<li class='answer' id= 'corA'>" + qa[0].correct + "</li>").insertAfter($("#answers li:nth-child("+rando+")"));
+      	// why does this sometimes not occur
+      	$("<li class='answer' id= 'corA'>" + qa[rounds].correct + "</li>").insertAfter($("#answers li:nth-child("+rando+")"));
       		
       	countDown();
 
@@ -122,12 +121,10 @@ $("#start").on("click", function(){
       		if (this.id === "corA") {
       			hit++;
       			$("#question").html("Correct! ")
-      			console.log("correct");
       		}
       		else {
       			miss++;
       			$("#question").html("Incorrect! ")
-      			console.log("Incorrect! ");
       		}
 
       		
@@ -139,51 +136,39 @@ $("#start").on("click", function(){
       	$("#answers").css("visibility", "hidden");
       	stop();
       	wt = 0;
-      	// make qa[0] qa[counter]
-      	$("#question").append("The Answer Was: " + qa[0].correct);
-      	countDown();
+      	$("#question").append("The Answer Was: " + qa[rounds].correct);
+      	rounds++;
+      	if (rounds >= qa.length) {
+      		endGame();
+      	}
+      	else{
+      		countDown();
+      	}
+      }
+
+      function endGame(){
+      	$("#timer").html("GAME OVER");
+      	if(miss > 0){
+      		$("#question").html("You missed " + miss);
+      	}
+      	else {
+      		$("#question").html("Congratulations! <br> You guessed all " + hit +"!");
+      	}
+
+      	$("#start").css("display", "initial");
+      	$("#start").removeAttr('id');
+
+      	$("button").html("RESET")
+
+      	$("button").on("click", function(){
+      		location.reload();
+      	})
+
       }
 
 
     }
 
-    // why does this loop break counter (decrement by 4)
-    // for (var j = 0; j < qa.length; j++){
-    	countDown();
-    // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    countDown();
 
 })
