@@ -9,46 +9,30 @@ var qa = [
 		{
 			question: "Which was the first Roman road / where did it run?",
 			correct: "Via Appia",
-			inco1: "Via Flaminia",
-			inco2: "Via Egnatia",
-			inco3: "Via Valeria",
+			inco: ["Via Flaminia", "Via Egnatia", "Via Valeria"],
 			pic: "#",
 		},
 		{
 			question: "Which enemy city did the Romans plough with salt?",
 			correct: "None",
-			inco1: "Carthage",
-			inco2: "Corinth",
-			inco3: "Syracuse",
+			inco: ["Carthage", "Corinth", "Syracuse"],
 			pic: "#",
 		},
 		{
 			question: "Which of the following did not defeat Mithridates VI of Pontus?",
 			correct: "Marius",
-			inco1: "Sulla",
-			inco2: "Lucullus",
-			inco3: "Pompey",
+			inco: ["Sulla", "Lucullus", "Pompey"],
 			pic: "#",
 		},
 		{
 			question: "How many times was Rome sacked in antiquity?",
 			correct: "Three or Four",
-			inco1: "One",
-			inco2: "Two",
-			inco3: "Six",
+			inco: ["One", "Two", "Six"]
 			pic: "#",
 		},
 
 ]
-
-	// qa = question: ?
-	// 		correct: correct answer
-	// 		inco1: wrong answer
-	// 		inco2: wrong answer
-	// 		inco3: wrong answer
-	// 		pic: Image
-	// or
-	// qa = question: ?
+	// qa[] = question: ?
 	// 		correct: correct answer
 	// 		inco: [wrong answer, wrong answer, wrong answer]
 	// 		pic: Image
@@ -129,6 +113,7 @@ $("#start").on("click", function(){
       	}
 
       	// is there a better way to randomly insert a list item
+      	// make qa[0] qa[counter]
       	$("<li class='answer' id= 'corA'>" + qa[0].correct + "</li>").insertAfter($("#answers li:nth-child("+rando+")"));
       		
       	countDown();
@@ -154,6 +139,7 @@ $("#start").on("click", function(){
       	$("#answers").css("visibility", "hidden");
       	stop();
       	wt = 0;
+      	// make qa[0] qa[counter]
       	$("#question").append("The Answer Was: " + qa[0].correct);
       	countDown();
       }
@@ -161,8 +147,8 @@ $("#start").on("click", function(){
 
     }
 
-
-    // for (var i = 0; i < qa.length; i++){
+    // why does this loop break counter (decrement by 4)
+    // for (var j = 0; j < qa.length; j++){
     	countDown();
     // }
 
