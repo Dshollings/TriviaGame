@@ -1,0 +1,79 @@
+body {
+	 /*figure this out*/
+	/*background-image: url(../assets/images/"rome-background.jpg");*/
+	background-color: black;
+	text-align: center;
+}
+h1 {
+	font-size: 3.5em;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	}
+
+#gamebox {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	max-width: 960px; 
+	background-color: grey;
+	margin-right: auto;
+	margin-left: auto;
+	opacity: 65%;
+}
+
+#title {
+	background-color: black;
+	color: white;
+}
+
+#button {
+
+}
+
+#timer {
+	background-color: black;
+	color: white;
+	width: 100%;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	font-size: 3em;
+}
+
+#question {
+	background-color: black;
+	color: white;
+	width: 100%;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	font-size: 2.5em;
+}
+
+#abox {
+	background-color: black;
+	width: 100%;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+#answers {
+	width: 100%;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.answer {
+	color: white;
+	background-color: black;
+	width: 33%;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	font-size: 1.5em;
+	margin-top: 2.5px;
+	margin-bottom: 2.5px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.answer:hover{
+	color: black;
+	background-color: white;
+}
