@@ -32,7 +32,8 @@ var qa = [
 		}
 
 ]
-	// qa[] = question: ?
+	// Question Structure:
+  // qa[] = question: ?
 	// 		correct: correct answer
 	// 		inco: [wrong answer, wrong answer, wrong answer]
 	// 		pic: Image
@@ -40,7 +41,8 @@ var qa = [
 // start
 
 $("#start").on("click", function(){
-	$(".hide").addClass("show");
+	console.log("Note: Click anywhere to skip wait timer");
+  $(".hide").addClass("show");
 	$(".hide").removeClass("hide");
 	$("#start").css("display", "none");
 	// timer
@@ -66,6 +68,7 @@ $("#start").on("click", function(){
     		time = 10;
     	}
     }
+    
     function showA(){
       $("#answers").css("visibility", "hidden");
       stop();
@@ -144,7 +147,6 @@ $("#start").on("click", function(){
 		$("#answers").empty();
 		$("#answers").css("visibility", "visible")
     	var rando = Math.floor((Math.random()*5)+1);
-      console.log(rando);
     	for (var i = 0; i < 5; i++){
     	      	$("#answers").append("<li class='answer'>" + qa[rounds].inco[i] + "</li>");
     	}
