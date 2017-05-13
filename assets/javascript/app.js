@@ -1,34 +1,34 @@
 
 var qa = [
 		{
-			question: "Who was the father of Romulus and Remus?",
+			question: "Which planet is home to volcano Olympus Mons, three times as tall as Mt. Everest?",
 			correct: "Mars",
-			inco: ["King Numitor", "Jupiter", "A wolf"],
-			pic: "#",
+			inco: ["Mercury", "Venus", "Earth", "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto"],
+			pic: "assets/images/mars.jpg",
 		},
 		{
-			question: "Which was the first Roman road / where did it run?",
-			correct: "Via Appia",
-			inco: ["Via Flaminia", "Via Egnatia", "Via Valeria"],
-			pic: "#",
+			question: "Which is the largest planet?",
+			correct: "Jupiter",
+			inco: ["Mercury", "Venus", "Earth", "Mars", "Saturn", "Uranus", "Neptune", "Pluto"],
+			pic: "assets/images/jupiter.jpg",
 		},
 		{
-			question: "Which enemy city did the Romans plough with salt?",
-			correct: "None",
-			inco: ["Carthage", "Corinth", "Syracuse"],
-			pic: "#",
+			question: "Which planet was kicked out of the planet club in 2006?",
+			correct: "Pluto",
+			inco: ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"],
+			pic: "assets/images/pluto.jpg",
 		},
 		{
-			question: "Which of the following did not defeat Mithridates VI of Pontus?",
-			correct: "Marius",
-			inco: ["Sulla", "Lucullus", "Pompey"],
-			pic: "#",
+			question: "Which planet is closest to the Sun?",
+			correct: "Mercury",
+			inco: ["Venus", "Earth", "Mars", "Jupiter", "Uranus", "Saturn", "Neptune", "Pluto"],
+			pic: "assets/images/mercury.jpg",
 		},
 		{
-			question: "How many times was Rome sacked in antiquity?",
-			correct: "Three or Four",
-			inco: ["One", "Two", "Six"],
-			pic: "#",
+			question: "Titan is the largest moon of which planet?",
+			correct: "Saturn",
+			inco: ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Uranus", "Neptune", "Pluto"],
+			pic: "assets/images/saturn.jpg",
 		}
 
 ]
@@ -65,13 +65,13 @@ $("#start").on("click", function(){
       else {
     		time = 10;
     	}
-
     }
     function showA(){
       $("#answers").css("visibility", "hidden");
       stop();
       //switches to wait state
       wq = 0;
+      $("body").css("background-image", "url("+qa[rounds].pic+")");
       $("#question").append("The Answer Was: " + qa[rounds].correct);
       rounds++;
       if (rounds >= qa.length) {
@@ -102,7 +102,12 @@ $("#start").on("click", function(){
     }
 
     function decrement() {
-
+      // click to skip wait timer
+      if(wq === 0){
+        $(document).click(function() {
+          time = 1;
+        });
+      }
       //  Decrease time by one.
       time -= 1;
 
@@ -138,21 +143,15 @@ $("#start").on("click", function(){
     	
 		$("#answers").empty();
 		$("#answers").css("visibility", "visible")
-    	var rando = Math.floor((Math.random()*3)+1);
+    	var rando = Math.floor((Math.random()*5)+1);
       console.log(rando);
-    	for (var i = 0; i < 3; i++){
+    	for (var i = 0; i < 5; i++){
     	      	$("#answers").append("<li class='answer'>" + qa[rounds].inco[i] + "</li>");
     	}
     	// is there a better way to randomly insert a list item, 
       // insertAfter = never zero position
-    	// if (rando > 0){
         $("<li class='answer' id= 'corA'>" + qa[rounds].correct + "</li>").
         insertAfter($("#answers li:nth-child("+rando+")"));
-      // }
-      // else {
-      //    $("<li class='answer' id= 'corA'>" + qa[rounds].correct + "</li>").
-      //   insertBefore($("#answers li:nth-child("+rando+")"));
-      // }
     		
     	countDown();
 
