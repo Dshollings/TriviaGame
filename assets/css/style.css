@@ -94,3 +94,44 @@ button {
 	color: black;
 	background-color: white;
 }
+
+@media only screen and (max-width: 640px) {
+	
+	h1 {
+		font-size: 32px;
+	} 
+
+	h2, button, #timer, #question{
+		font-size: 24px;
+	}
+
+	.answers {
+		font-size: 18px;
+	}
+
+
+	#gamebox {
+		width: 90%; 
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
