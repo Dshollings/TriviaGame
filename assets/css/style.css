@@ -1,9 +1,11 @@
+
 body {
 	 
 	background-image: url("../../assets/images/Sun.jpg");
     background-color: black;
     background-size: 100%;
 	text-align: center;
+	font-family: sans-serif;
 }
 
 h1 {
@@ -28,6 +30,7 @@ h1 {
 	margin-right: auto;
 	margin-left: auto;
 	opacity: .6;
+	border-radius: 18px;
 }
 
 #title {
@@ -93,6 +96,7 @@ button:hover{
 	margin-bottom: 2.5px;
 	margin-right: auto;
 	margin-left: auto;
+	border-radius: 6px;
 }
 
 .answer:hover{
