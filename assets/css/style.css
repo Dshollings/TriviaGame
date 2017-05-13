@@ -41,6 +41,11 @@ button {
 	font-size: 2em;	
 }
 
+button:hover{
+	background-color: black;
+	color: white;
+}
+
 #timer {
 	background-color: black;
 	color: white;
@@ -108,7 +113,11 @@ button {
 	.answers {
 		font-size: 18px;
 	}
-
+	
+	.answer:hover{
+	color: white;
+	background-color: black;
+	}
 
 	#gamebox {
 		width: 90%; 
