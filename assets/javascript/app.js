@@ -51,19 +51,54 @@ $("#start").on("click", function(){
 	var hit = 0;
 	var miss = 0;
 
-	//acts as switch between wait and timer
-	var wt = 0;
+	//acts as switch between wait and question states
+	var wq = 0;
 
 
 	function countDown() {
       intervalId = setInterval(decrement, 1000);
-    	if (wt === 0){
+    	// if in wait state, short count
+      if (wq === 0){
     		time = 5;
     	}
-    	else {
+    	// if in question state, long count
+      else {
     		time = 10;
     	}
 
+    }
+    function showA(){
+      $("#answers").css("visibility", "hidden");
+      stop();
+      //switches to wait state
+      wq = 0;
+      $("#question").append("The Answer Was: " + qa[rounds].correct);
+      rounds++;
+      if (rounds >= qa.length) {
+        endGame();
+      }
+      else{
+        countDown();
+      }
+    }
+
+   function endGame(){
+      $("#timer").html("GAME OVER");
+      if(miss > 0){
+        $("#question").html("You missed " + miss);
+      }
+      else {
+        $("#question").html("Congratulations! <br> You guessed all " + hit +"!");
+      }
+
+      $("#start").css("display", "initial");
+      $("#start").removeAttr('id');
+
+      $("button").html("RESET")
+
+      $("button").on("click", function(){
+        location.reload();
+      })
     }
 
     function decrement() {
@@ -78,95 +113,62 @@ $("#start").on("click", function(){
       if (time <= 0) {
       	
       	stop();
-      	//if waiting
-      	if (wt === 0){
-      		console.log("new");
+      	//if wait time ends, start question
+      	if (wq === 0){
       		newQ();
       	}
-      	// if question time ends
+      	// out of time
       	// doesnt quite work
       	else{
       		miss++;
-      		$("#question").html("Incorrect! ")
+      		$("#question").html("Incorrect! ");
       		showA();
       	}
       }
     }
-
+    // stops the clock
     function stop() {
       clearInterval(intervalId);
     }
 
     function newQ(){
     	//switch to question state
-    	wt = 1
-    	// make qa[0] qa[counter]
+    	wq = 1
     	$("#question").html(qa[rounds].question)
     	
 		$("#answers").empty();
 		$("#answers").css("visibility", "visible")
     	var rando = Math.floor((Math.random()*3)+1);
-        console.log(rando);
-      	for (var i = 0; i < 3; i++){
-      	      	$("#answers").append("<li class='answer'>" + qa[rounds].inco[i] + "</li>");
-      	}
+      console.log(rando);
+    	for (var i = 0; i < 3; i++){
+    	      	$("#answers").append("<li class='answer'>" + qa[rounds].inco[i] + "</li>");
+    	}
+    	// is there a better way to randomly insert a list item, 
+      // insertAfter = never zero position
+    	// if (rando > 0){
+        $("<li class='answer' id= 'corA'>" + qa[rounds].correct + "</li>").
+        insertAfter($("#answers li:nth-child("+rando+")"));
+      // }
+      // else {
+      //    $("<li class='answer' id= 'corA'>" + qa[rounds].correct + "</li>").
+      //   insertBefore($("#answers li:nth-child("+rando+")"));
+      // }
+    		
+    	countDown();
 
-      	// is there a better way to randomly insert a list item
-      	// why does this sometimes not occur
-      	$("<li class='answer' id= 'corA'>" + qa[rounds].correct + "</li>").insertAfter($("#answers li:nth-child("+rando+")"));
-      		
-      	countDown();
+    	$(".answer").on("click", function(){
+    		if (this.id === "corA") {
+    			hit++;
+    			$("#question").html("Correct! ")
+    		}
+    		else {
+    			miss++;
+    			$("#question").html("Incorrect! ")
+    		}
+    		showA();
+    	})
 
-      	$(".answer").on("click", function(){
-      		if (this.id === "corA") {
-      			hit++;
-      			$("#question").html("Correct! ")
-      		}
-      		else {
-      			miss++;
-      			$("#question").html("Incorrect! ")
-      		}
-
-      		
-      		showA();
-
-      	})
-
-      function showA(){
-      	$("#answers").css("visibility", "hidden");
-      	stop();
-      	wt = 0;
-      	$("#question").append("The Answer Was: " + qa[rounds].correct);
-      	rounds++;
-      	if (rounds >= qa.length) {
-      		endGame();
-      	}
-      	else{
-      		countDown();
-      	}
-      }
-
-      function endGame(){
-      	$("#timer").html("GAME OVER");
-      	if(miss > 0){
-      		$("#question").html("You missed " + miss);
-      	}
-      	else {
-      		$("#question").html("Congratulations! <br> You guessed all " + hit +"!");
-      	}
-
-      	$("#start").css("display", "initial");
-      	$("#start").removeAttr('id');
-
-      	$("button").html("RESET")
-
-      	$("button").on("click", function(){
-      		location.reload();
-      	})
-
-      }
-
-
+     
     }
 
     countDown();
